@@ -17,7 +17,7 @@ import com.jorge.fairePlats.models.Recipe;
 import com.jorge.fairePlats.erros.ResourceNotFoundException;
 import com.jorge.fairePlats.repository.RecipeRepository;
 
-@CrossOrigin(origins="")
+@CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/recipes")
 public class RecipeController {
@@ -31,20 +31,20 @@ public class RecipeController {
     }
 
     @PostMapping
-    public Recipe crearPlato(@RequestBody Recipe recipe) {
+    public Recipe crearReceta(@RequestBody Recipe recipe) {
         return recipeRepository.save(recipe);
     }
 
     @GetMapping("/{id}")
-    public Recipe obtenerPlatoPorId(@PathVariable("id") Long id) {
+    public Recipe obtenerRecetaPorId(@PathVariable("id") Long id) {
         return recipeRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Plato no encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundException("Receta no encontrado"));
     }
 
     @PutMapping("/{id}")
-    public Recipe actualizarPlato(@PathVariable("id") Long id, @RequestBody Recipe detallesRecipe) {
+    public Recipe actualizarReceta(@PathVariable("id") Long id, @RequestBody Recipe detallesRecipe) {
     	Recipe recipe = recipeRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Plato no encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundException("Receta no encontrado"));
 
     	recipe.setTitle(detallesRecipe.getTitle());
     	recipe.setDifficulty(detallesRecipe.getDifficulty());
@@ -52,5 +52,10 @@ public class RecipeController {
 
         return recipeRepository.save(recipe);
     }
+    
+	@DeleteMapping("/{id}")
+	public void delete(@PathVariable(value = "id")long id) {
+		recipeRepository.deleteById(id);
+	}
 
 }

@@ -8,7 +8,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-
 @Entity
 @Table(name = "recipes")
 public class Recipe implements Serializable{
@@ -31,12 +30,6 @@ public class Recipe implements Serializable{
 
 	@Column(name = "image")
 	private String image;
-	
-	@Column(name = "ingredients")
-	private String ingredients;
-	
-	@Column(name = "steps")
-	private String steps;
 	
 	public long getId() {
 		return id;
@@ -78,30 +71,12 @@ public class Recipe implements Serializable{
 		this.image = image;
 	}
 
-	public String getIngredients() {
-		return ingredients;
-	}
-
-	public void setIngredients(String ingredients) {
-		this.ingredients = ingredients;
-	}
-	
-	public String getSteps() {
-		return steps;
-	}
-
-	public void setSteps(String steps) {
-		this.steps = steps;
-	}
-
-	public Recipe( String title, int difficulty, int time, String image, String ingredients, String steps) {
+	public Recipe( String title, int difficulty, int time, String image) {
 		super();
 		this.title = title;
 		this.difficulty = difficulty;
 		this.time = time;
 		this.image = image;
-		this.ingredients = ingredients;
-		this.steps = steps;
 	}
 
 	public Recipe() {
